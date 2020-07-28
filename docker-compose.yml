@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+      - ./src/:/build/wingman/
+    ports:
+      - "8900:8080"

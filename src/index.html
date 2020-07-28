@@ -21,13 +21,19 @@
         recognition.onstart = function() {
           console.log("Voice recognition started. Try speaking into the microphone.");
         };
+
+        recognition.onend = function(arg) {
+          console.log("stopped listening", arg);
+        };
         
         recognition.onresult = function(event) {
-          var transcript = event.results[0][0].transcript;
+          var transcript = event;
           console.log(transcript);
         };
         
         // start recognition
+        recognition.continuous = true;
+        console.log(recognition)
         recognition.start();
         //   .....
       } else {
