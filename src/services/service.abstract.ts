@@ -1,28 +1,38 @@
-import {IntentInterface} from "./intent.abstract";
-export default class ServiceAbstract 
+import {IntentInterface} from "./intent.abstract"
+
+export interface ServiceInterface
 {
-  intents: IntentInterface[];
-  constructor() 
+  intents: IntentInterface[]
+  name: string
+  getIntents():Array<IntentInterface>
+  addIntent(intent: IntentInterface):void
+
+}
+export default class ServiceAbstract implements ServiceInterface
+{
+  intents: IntentInterface[]
+  name: string
+  constructor(name: string)
   {
+    this.name = name
     this.intents = []
   }
 
   /**
-   * Add intent as name
-   * @param name 
-   * @param intent 
+   * Return array of intents
    */
-  defineIntent(name:string, intent: IntentInterface) 
+  getIntents():Array<IntentInterface>
   {
-    this.intents[name] = intent;
+    return Object.values(this.intents)
   }
 
   /**
    * Add intent to a service
    * @param intent
    */
-  addIntent(intent: IntentInterface) 
+  addIntent(intent: IntentInterface):void
   {
-    this.intents[intent.label] = intent;
+    intent.setService(this.name)
+    this.intents[intent.label] = intent
   }
 }

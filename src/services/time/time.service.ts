@@ -6,7 +6,7 @@ class TimeService extends ServiceAbstract
 {
   constructor()
   {
-    super();
+    super(`time`);
     this.addIntent(new TimeNowIntent())
   }
 }

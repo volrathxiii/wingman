@@ -1,6 +1,6 @@
 import {IntentAbstract} from "../intent.abstract"
 
-export default class TimeNowIntent extends IntentAbstract
+export default class StopListenIntent extends IntentAbstract
 {
   label: string
   utterances: string[]
@@ -8,12 +8,16 @@ export default class TimeNowIntent extends IntentAbstract
   constructor(serviceName?:string) {
     super(serviceName)
 
-    this.label = `timenow`
+    this.label = `stoplisten`
     
     this.utterances = [
-      `what time is it`,
-      `what is the time`,
-      `time now`,
-    ]
+      "stop listen",
+      "stop listening",
+      ]
+  }
+
+  execute()
+  {
+    
   }
 }
