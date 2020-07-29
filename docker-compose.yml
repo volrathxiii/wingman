@@ -5,4 +5,5 @@ services:
     volumes:
       - ./src/:/build/wingman/
     ports:
-      - "8900:8080"
+      - "8080:8080"
+      - "8081:8081"
