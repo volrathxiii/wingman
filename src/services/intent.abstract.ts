@@ -1,17 +1,45 @@
+import Config from "../processor/config.singleton"
+
 export type UtterancesType = string[]
+export interface IntentResponse
+{
+  data: object|string
+}
+
+export class IntentViewRespose implements IntentResponse
+{
+  data: object
+  constructor(id:string,html:string)
+  {
+    this.data= {
+      id: id,
+      html: html
+    }
+  }
+}
+
+export class IntentSpeakResponse implements IntentResponse
+{
+  data: string
+  constructor(message:string)
+  {
+    this.data = message
+  }
+}
+
+
 
 export interface IntentInterface {
   label: string
   service: string
-  utterances: UtterancesType
-  getUttenrances(): UtterancesType
   setService(serviceName:string):void
+  execute(utterance:string): Array<IntentResponse>
+  executeIntent(utterance:string): Array<IntentResponse>
 }
 
 export abstract class IntentAbstract implements IntentInterface
 {
   abstract label: string
-  abstract utterances: string[]
 
   constructor(serviceName?:string)
   {
@@ -29,9 +57,20 @@ export abstract class IntentAbstract implements IntentInterface
     this.service = serviceName
   }
 
-  getUttenrances() :UtterancesType
+  executeIntent(utterance:string): Array<IntentResponse>
   {
-    return this.utterances
+    if(Config.get('listen') === true) return this.execute(utterance)
+    return []
+  }
+
+  abstract execute(utterance:string): Array<IntentResponse>
+}
+
+export abstract class SystemIntentAbstract extends IntentAbstract
+{
+  executeIntent(utterance:string): Array<IntentResponse>
+  {
+    return this.execute(utterance)
   }
 }
 

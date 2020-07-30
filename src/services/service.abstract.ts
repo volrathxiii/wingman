@@ -6,7 +6,7 @@ export interface ServiceInterface
   name: string
   getIntents():Array<IntentInterface>
   addIntent(intent: IntentInterface):void
-
+  getIntent(label:string):IntentInterface
 }
 export default class ServiceAbstract implements ServiceInterface
 {
@@ -24,6 +24,15 @@ export default class ServiceAbstract implements ServiceInterface
   getIntents():Array<IntentInterface>
   {
     return Object.values(this.intents)
+  }
+
+  /**
+   * Get specific intent
+   * @param label 
+   */
+  getIntent(label:string):IntentInterface
+  {
+    return this.intents[label]
   }
 
   /**

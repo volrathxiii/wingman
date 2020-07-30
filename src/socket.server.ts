@@ -1,22 +1,40 @@
-require('dotenv').config();
+require('dotenv').config()
 
-import {Server} from 'ws';
-import * as http from 'http';
+import {Server} from 'ws'
+import Processor from "./processor"
 
-const port = process.env.WEBSOCKET_PORT || 8081
+const port:number = parseInt(process.env.WEBSOCKET_PORT) || 8081
 
-const server = http.createServer()
+const processor = new Processor()
 
-const wss = new Server( {server} )
+const wss = new Server({port:port},()=>{
+  console.log(`WebSocket Port: ${port}`)
+})
 
-wss.on('connenction', ws=>{
-  console.log('New client!');
+wss.on('connection', ws=>{
+  console.log('New client!')
 
   ws.on('close', ()=>{
-    console.log('client disconnected!');
+    console.log('client disconnected!')
+  })
+
+  ws.on('message', async (message:string)=>{
+    console.log(`Message: ${message}`)
+    let data = JSON.parse(message)
+    let processed = await processor.execute(data.transcript)
+    if(processed === false) {
+      console.log(`UndefinedCommand: ${message}`)
+      return false
+    }
+    processed.forEach(intent=>{
+      let output = JSON.stringify({
+        type: intent.constructor.name,
+        data: intent.data
+      })
+      // Send reply
+      console.log(`Reply: ${output}`)
+      ws.send(output)
+    })
   })
 })
 
-server.listen(port,() => {
-  console.log(`WebSocket Port: ${port}`)
-})
