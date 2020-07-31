@@ -60,11 +60,12 @@ export default class IntentClassifier
       process.cwd(),
       `training`,
       `recognition`,
-      `${service}.${intent}.train.json`
+      `${service}.${intent}.train.txt`
     )
 
     if(fs.existsSync(file)) {
-      let trainData = require(file)
+      let document = fs.readFileSync(file).toString()
+      let trainData = document.split(/\r?\n/)
       trainData.forEach((utterance: string) => {
         this.classifier.addDocument(utterance,`${service}.${intent}`)
       });

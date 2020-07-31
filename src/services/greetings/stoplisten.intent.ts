@@ -18,10 +18,10 @@ export default class StopListenIntent extends IntentAbstract
 
     let possibleOutputs = [
       `Okay`,
-      `Fine, ill be quite`,
+      `Fine, ill be quiet`,
       `So be it`,
       `Just let me know if you need anything else`,
-      `Enable quite mode`,
+      `Enable quiet mode`,
       `Ahh thank you`,
       `Finally!`,
       `See ya!`,

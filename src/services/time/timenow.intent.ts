@@ -1,5 +1,7 @@
 import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
 import * as Moment from 'moment'
+import TimeVocal from '../../vocalize/time.vocal'
+import SentenceGenerator from '../../vocalize/index'
 
 export default class TimeNowIntent extends IntentAbstract
 {
@@ -16,9 +18,16 @@ export default class TimeNowIntent extends IntentAbstract
     let response = []
 
     let time = Moment().format('LT');
+
+    let timeVocal = new TimeVocal()
+
+    let Sentence = SentenceGenerator.generate(
+      `${this.service}.${this.label}`, 
+      {time: timeVocal.random()}, utterance
+    )
     
     response.push(new IntentViewRespose(`${this.service}-${this.label}`, time))
-    response.push(new IntentSpeakResponse(String(time).replace(':',' ')))
+    response.push(new IntentSpeakResponse(Sentence))
 
     return response
   }

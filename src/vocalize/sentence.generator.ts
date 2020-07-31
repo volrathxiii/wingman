@@ -3,14 +3,6 @@ import * as SentimentModule from "sentiment"
 import * as fs from 'fs'
 
 /**
-  {
-    template,
-    sentiment,
-    classification
-  }
- */
-
-/**
  * Expose Sentiment Class so users 
  * can setup their own config
  */
@@ -86,7 +78,8 @@ export class SentenceLearning
   {
     if(!fs.existsSync(filename)) throw new Error(`Invalid file.`)
 
-    let records = require(filename)
+    let document = fs.readFileSync(filename).toString()
+    let records = document.split(/\r?\n/)
     records.forEach(record=>{
       this.addDocument(record, classification)
     })
@@ -101,12 +94,21 @@ export class SentenceLearning
     })
   }
 
-  load(filename:string) {
-
+  load(filename:string):boolean 
+  {
+    if(fs.existsSync(filename)) {
+      this.templates = require(filename)
+      return true
+    }
+    return false
   }
 
   save(filename:string) {
-
+    let content = JSON.stringify(this.templates)
+    fs.writeFile(filename, content, function (err) {
+      if (err) throw err;
+      console.log('Saved!');
+    });
   }
 }
 
@@ -125,8 +127,6 @@ export default class SentenceGenerator extends SentenceLearning
 
     let templates = this.getTemplates(classification, sentiment)
     if(templates.length <= 0) templates = this.getTemplates(classification, 0)
-
-    console.log(this.templates)
 
     let template = templates[Math.floor(Math.random() * templates.length)];
 
