@@ -57,9 +57,9 @@ export default class IntentClassifier
   private loadTrainFile(service:string, intent:string)
   {
     let file = path.join(
-      __dirname,
+      process.cwd(),
       `training`,
-      `intent`,
+      `recognition`,
       `${service}.${intent}.train.json`
     )
 

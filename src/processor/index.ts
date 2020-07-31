@@ -1,6 +1,6 @@
 import Config from "./config.singleton"
 import Services from "../services"
-import IntentClassifier from "../language/intent.classifier"
+import IntentClassifier from "../recognition/intent.classifier"
 
 export type ExecutionType = "intent" | "boot"
 
