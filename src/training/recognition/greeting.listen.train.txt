@@ -5,6 +5,7 @@ helloo
 start listening
 start listen
 listen to me
+talk to me
 tell me
 are you there?
 im here

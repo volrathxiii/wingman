@@ -1,13 +1,13 @@
 stop listen
 stop listening
-quite mode
+quiet mode
 silence
 silent mode
 no listening
 do not listen
 don't listen
 mute
-be quite
+be quiet
 exit
 die
 quit

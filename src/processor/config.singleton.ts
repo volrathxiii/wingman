@@ -1,9 +1,12 @@
+require('dotenv').config()
+
 class ConfigSingleton {
   data:object
   constructor(){
-   this.data = {
-    listen: true
-   }
+    this.data = {
+      listen: true,
+      name: process.env.WINGMAN_NAME || 'Wingman'
+    }
   }
 
   get(config:string)

@@ -34,6 +34,7 @@ export interface IntentInterface {
   label: string
   service: string
   setService(serviceName:string):void
+  getTag():string
   execute(utterance:string, data:object): Array<IntentResponse>
   executeIntent(utterance:string): Array<IntentResponse>
 }
@@ -43,19 +44,24 @@ export abstract class IntentAbstract implements IntentInterface
 {
   abstract label: string
   private sentiment: Sentiment
+  /**
+   * service name
+   */
+  service:string
 
   constructor(serviceName?:string)
   {
     if(typeof serviceName !== 'undefined') 
       this.setService(serviceName)
 
+    
     this.sentiment = new Sentiment({})
   }
 
-  /**
-   * service name
-   */
-  service:string
+  getTag():string
+  {
+    return `${this.service}.${this.label}`
+  }
 
   setService(serviceName:string):void
   {

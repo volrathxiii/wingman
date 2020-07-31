@@ -13,6 +13,14 @@ class TimeVocal
     this.formatOptions= ["normal","daylight","oclock","before","past"]
   }
 
+  timeOfDay():string
+  {
+    let hour = parseInt(this.instance.format("H"))
+    if(hour >= 4 && hour <= 11) return `good morning`
+    if(hour >= 12 && hour <= 17) return `good afternoon`
+    if(hour >= 18 || hour <= 3) return `good evening`
+  }
+
   random() {
     var format = this.formatOptions[Math.floor(Math.random() * this.formatOptions.length)];
     return this.format(format)
