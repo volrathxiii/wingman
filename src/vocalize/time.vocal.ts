@@ -16,9 +16,9 @@ class TimeVocal
   timeOfDay():string
   {
     let hour = parseInt(this.instance.format("H"))
-    if(hour >= 4 && hour <= 11) return `good morning`
-    if(hour >= 12 && hour <= 17) return `good afternoon`
-    if(hour >= 18 || hour <= 3) return `good evening`
+    if(hour >= 4 && hour <= 11) return `morning`
+    if(hour >= 12 && hour <= 17) return `afternoon`
+    if(hour >= 18 || hour <= 3) return `evening`
   }
 
   random() {

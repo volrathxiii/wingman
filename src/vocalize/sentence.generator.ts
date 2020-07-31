@@ -130,8 +130,6 @@ export default class SentenceGenerator extends SentenceLearning
 
     let template = templates[Math.floor(Math.random() * templates.length)];
 
-    console.log(templates)
-
     let result = String(template.template)
     let keys = Object.keys(variables)
     

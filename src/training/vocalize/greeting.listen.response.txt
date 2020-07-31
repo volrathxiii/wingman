@@ -1,14 +1,15 @@
-{time}, im listening
-{time}, im here
-{time}
-{time} beautiful day, right?
+good {time}, im listening
+good {time}, im here
+good {time}
+good {time} beautiful day, right?
 hey
 how can i help?
 can i help you?
 what do you need?
 hello
 hi
-hi. {time}
+very nice {time} would you agree
+hi. good {time}
 having a bad fucking day?
 what is it?
 yes?
@@ -25,3 +26,4 @@ if im not a computer i wouldn't entertain your bad attitude
 what do you want asshole?
 hey sunshine!
 having a great day?
+having a bad {time}?

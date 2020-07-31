@@ -29,7 +29,6 @@ export default class ListenIntent extends SystemIntentAbstract
 
     let timeVocal = new TimeVocal()
 
-    console.log(this.getTag(),'--tag')
     let Sentence = SentenceGenerator.generate(
       this.getTag(), 
       {time: timeVocal.timeOfDay()}, utterance

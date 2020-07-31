@@ -3,7 +3,7 @@ import ServiceAbstract from '../service.abstract';
 import ListenIntent from './listen.intent';
 import StopListenIntent from './stoplisten.intent';
 
-class GreetingsService extends ServiceAbstract
+class GreetingService extends ServiceAbstract
 {
   constructor()
   {
@@ -13,5 +13,5 @@ class GreetingsService extends ServiceAbstract
   }
 }
 
-export default new GreetingsService();
+export default new GreetingService();
 
