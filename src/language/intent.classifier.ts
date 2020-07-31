@@ -57,7 +57,7 @@ export default class IntentClassifier
   private loadTrainFile(service:string, intent:string)
   {
     let file = path.join(
-      process.cwd(),
+      __dirname,
       `training`,
       `intent`,
       `${service}.${intent}.train.json`
@@ -65,7 +65,7 @@ export default class IntentClassifier
 
     if(fs.existsSync(file)) {
       let trainData = require(file)
-      trainData.forEach(utterance => {
+      trainData.forEach((utterance: string) => {
         this.classifier.addDocument(utterance,`${service}.${intent}`)
       });
     }

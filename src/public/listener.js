@@ -28,7 +28,6 @@ ws.addEventListener("message",(event)=>{
 
   if(response.type === "IntentViewRespose") ViewResponse(response.data.id, response.data.html)
   if(response.type === "IntentSpeakResponse") SpeakResponse(response.data)
-  
 })
 
 if ("webkitSpeechRecognition" in window) {

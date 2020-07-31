@@ -1,4 +1,5 @@
 import Config from "../processor/config.singleton"
+import * as Sentiment from "sentiment"
 
 export type UtterancesType = string[]
 export interface IntentResponse
@@ -33,18 +34,22 @@ export interface IntentInterface {
   label: string
   service: string
   setService(serviceName:string):void
-  execute(utterance:string): Array<IntentResponse>
+  execute(utterance:string, data:object): Array<IntentResponse>
   executeIntent(utterance:string): Array<IntentResponse>
 }
+
 
 export abstract class IntentAbstract implements IntentInterface
 {
   abstract label: string
+  private sentiment: Sentiment
 
   constructor(serviceName?:string)
   {
     if(typeof serviceName !== 'undefined') 
       this.setService(serviceName)
+
+    this.sentiment = new Sentiment({})
   }
 
   /**

@@ -1,4 +1,5 @@
 import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
+import * as Moment from 'moment'
 
 export default class TimeNowIntent extends IntentAbstract
 {
@@ -14,14 +15,7 @@ export default class TimeNowIntent extends IntentAbstract
   {
     let response = []
 
-    let date = new Date();
-    let hours = date.getHours();
-    
-    let hour = (hours>12) ? hours - 12 : hours
-    hour = (hour<1) ? 12 : hour
-    let hourSuffix = (hours>12) ? "PM" : "AM"
-
-    let time = `${hour}:${date.getMinutes()} ${hourSuffix}`
+    let time = Moment().format('LT');
     
     response.push(new IntentViewRespose(`${this.service}-${this.label}`, time))
     response.push(new IntentSpeakResponse(String(time).replace(':',' ')))
