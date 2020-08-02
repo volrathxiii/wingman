@@ -28,7 +28,6 @@ if ("webkitSpeechRecognition" in window) {
   // start recognition
   recognition.continuous = true;
   
-  
   window.addEventListener("StartListen", ()=>{
     setTimeout(()=>{
       recognition.start();
