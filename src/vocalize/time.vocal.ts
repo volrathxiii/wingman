@@ -1,4 +1,4 @@
-import * as moment from 'moment'
+import moment from 'moment'
 
 type VocalFormat = "normal"|"daylight"|"oclock"|"before"|"past"
 
@@ -18,7 +18,8 @@ class TimeVocal
     let hour = parseInt(this.instance.format("H"))
     if(hour >= 4 && hour <= 11) return `morning`
     if(hour >= 12 && hour <= 17) return `afternoon`
-    if(hour >= 18 || hour <= 3) return `evening`
+    // if(hour >= 18 || hour <= 3) 
+    return `evening`
   }
 
   random() {
@@ -37,7 +38,8 @@ class TimeVocal
         let displayHour = parseInt(_this.instance.format("h"))
         if(hour >= 4 && hour <= 11) return `${displayHour} in the morning`
         if(hour >= 12 && hour <= 17) return `${displayHour} in the afternoon`
-        if(hour >= 18 || hour <= 3) return `${displayHour} in the evening`
+        // if(hour >= 18 || hour <= 3) 
+        return `${displayHour} in the evening`
       },
       oclock: function():string {
         let hour = parseInt(_this.instance.format("h"))

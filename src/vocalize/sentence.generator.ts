@@ -1,5 +1,5 @@
 
-import * as SentimentModule from "sentiment"
+import SentimentModule from "sentiment"
 import * as fs from 'fs'
 
 /**
@@ -121,7 +121,7 @@ export default class SentenceGenerator extends SentenceLearning
     })
   }
 
-  generate(classification:string, variables:object = {}, sentiment: number|string = 0):string
+  generate(classification:string, variables:{[key:string]: string} = {}, sentiment: number|string = 0):string
   {
     if(typeof sentiment === 'string') sentiment = this.analize(sentiment).score
 

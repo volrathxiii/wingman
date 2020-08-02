@@ -1,5 +1,5 @@
 import Services from "../services"
-import {BayesClassifier} from "natural"
+import {BayesClassifier, BayesClassifierClassification} from "natural"
 import * as path from 'path'
 import * as fs from 'fs'
 
@@ -11,6 +11,8 @@ export default class IntentClassifier
 
   constructor(services: Services)
   {
+    this.unclassifiedToken = ``
+    this.classifier = new BayesClassifier()
     this.trainExportFile = path.join(process.cwd(),`tmp`,`intent.classifier.json`)
     this.setUpClassifier(services)
   }
@@ -76,7 +78,7 @@ export default class IntentClassifier
    * Get classifications
    * @param utterance 
    */
-  getClassifications(utterance:string): Array<Object>
+  getClassifications(utterance:string): BayesClassifierClassification[]
   {
     let result = this.classifier.getClassifications(utterance)
     if(JSON.stringify(result) === this.unclassifiedToken) return []

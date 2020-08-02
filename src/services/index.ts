@@ -4,11 +4,13 @@ import {sync} from "glob"
 
 export default class Services
 {
-  protected services: ServiceInterface[]
+  protected services: {[key:string]: ServiceInterface}
   protected intents: Array<IntentInterface>
 
   constructor()
   {
+    this.services = {}
+    this.intents = []
     this.loadServices()
     this.loadIntents()
   }
@@ -42,7 +44,6 @@ export default class Services
 
   private loadServices():void
   {
-    this.services = []
     let serviceFiles = sync(`./**/*.service.*(ts|js)`, {cwd:__dirname})
 
     serviceFiles.forEach((moduleFile:string) => {

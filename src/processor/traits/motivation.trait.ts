@@ -4,10 +4,10 @@ import Memory from '../memory.singleton'
 export default class MotivationTrait extends TraitBaseAbstract
 {
   private motivation: number
-  constructor(motivation?:TraitLevelParam)
+  constructor(motivation:TraitLevelParam = 0)
   {
     super(`motivation`)
-    if(typeof motivation === 'undefined') motivation = Memory.get(`traits`).motivation
+    if(motivation === 0) motivation = Memory.get(`traits`).motivation
     this.motivation = (motivation+5)/10
   }
 

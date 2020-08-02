@@ -2,7 +2,7 @@ import {TraitInterface} from '../traits/trait.abstract'
 
 export default abstract class SubProcessAbstract
 {
-  private proccessor: object
+  private proccessor: {[key:string]: TraitInterface}
 
   constructor(traits:Array<TraitInterface> = [])
   {

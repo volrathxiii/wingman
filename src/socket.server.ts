@@ -3,7 +3,7 @@ require('dotenv').config()
 import {Server} from 'ws'
 import Processor from "./processor"
 
-const port:number = parseInt(process.env.WEBSOCKET_PORT) || 8081
+const port:number = parseInt(String(process.env.WEBSOCKET_PORT)) || 8081
 
 const processor = new Processor()
 
@@ -22,7 +22,7 @@ wss.on('connection', ws=>{
     console.log(`Message: ${message}`)
     let data = JSON.parse(message)
     let processed = await processor.execute(data.transcript)
-    if(processed === false) {
+    if(processed === false || typeof processed === 'undefined') {
       console.log(`UndefinedCommand: ${message}`)
       return false
     }
@@ -37,4 +37,3 @@ wss.on('connection', ws=>{
     })
   })
 })
-

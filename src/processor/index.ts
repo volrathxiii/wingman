@@ -49,13 +49,13 @@ export default class Processor
   {
     try {
       let Intent = this.determineIntent(utterance)
-      console.log(Intent instanceof SystemIntentAbstract)
       if(this.subprocess.acceptance.execute(utterance) || Intent instanceof SystemIntentAbstract)
       {
         if(type === "intent") return this.executeIntent(utterance,Intent)
       }
     } catch (error) {
       console.log(error)
+      return false
     }
   }
 }

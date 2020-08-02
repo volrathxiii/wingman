@@ -1,5 +1,5 @@
 import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
-import * as Moment from 'moment'
+import Moment from 'moment'
 import TimeVocal from '../../vocalize/time.vocal'
 import SentenceGenerator from '../../vocalize/index'
 

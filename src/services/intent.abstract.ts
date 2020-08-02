@@ -1,5 +1,5 @@
 import Memory from "../processor/memory.singleton"
-import * as Sentiment from "sentiment"
+import Sentiment from "sentiment"
 
 export type UtterancesType = string[]
 export interface IntentResponse
@@ -51,6 +51,7 @@ export abstract class IntentAbstract implements IntentInterface
 
   constructor(serviceName?:string)
   {
+    this.service = ``
     if(typeof serviceName !== 'undefined') 
       this.setService(serviceName)
 

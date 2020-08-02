@@ -12,14 +12,14 @@ type InterestParam = {
  */
 export default class InterestTrait extends TraitBaseAbstract
 {
-  private interests: object
+  private interests: {[key:string]: number}
   private classifier: BayesClassifier
 
-  constructor(interests?:Array<InterestParam>)
+  constructor(interests:Array<InterestParam> = [])
   {
     super(`interest`)
     
-    if(typeof interests === 'undefined') interests = Memory.get(`traits`).interest
+    if(interests.length === 0) interests = Memory.get(`traits`).interest
     this.interests={}
     interests.forEach(interest=>{
       this.interests[interest.label] = this.levelToNumber(interest.level)
@@ -35,12 +35,12 @@ export default class InterestTrait extends TraitBaseAbstract
     classification = classification.filter(classify=>{
       return classify.value === topScore
     })
-    let result = {}
+    let result:{[key:string]: number} = {}
     classification.forEach(category=>{
       result[category.label] = category.value
     })
 
-    let computations = {}
+    let computations:{[key:string]: number} = {}
     Object.keys(this.interests).forEach(interest=>{
       if(result[interest]) computations[interest] = this.interests[interest] * result[interest]
       

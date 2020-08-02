@@ -4,8 +4,9 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 class MemorySingleton {
-  data:object
+  data:{[key:string]: any}
   constructor(){
+    this.data = {}
     if(!this.loadMemory()) {
       this.data = require(`${process.cwd()}/config.json`)
     }
@@ -13,7 +14,7 @@ class MemorySingleton {
 
   private loadMemory():boolean
   {
-    let file = path.join(process.env.TEMP_DIR, 'stored.memory.data.json')
+    let file = path.join(String(process.env.TEMP_DIR), 'stored.memory.data.json')
     if(fs.existsSync(file)) {
       this.data = require(file)
       return true

@@ -2,7 +2,7 @@ import {IntentInterface} from "./intent.abstract"
 
 export interface ServiceInterface
 {
-  intents: IntentInterface[]
+  intents:  {[key:string]: IntentInterface}
   name: string
   getIntents():Array<IntentInterface>
   addIntent(intent: IntentInterface):void
@@ -10,12 +10,12 @@ export interface ServiceInterface
 }
 export default class ServiceAbstract implements ServiceInterface
 {
-  intents: IntentInterface[]
+  intents: {[key:string]: IntentInterface}
   name: string
   constructor(name: string)
   {
     this.name = name
-    this.intents = []
+    this.intents = {}
   }
 
   /**
