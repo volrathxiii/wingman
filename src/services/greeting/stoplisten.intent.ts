@@ -1,5 +1,5 @@
 import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
-import Config from "../../processor/config.singleton"
+import Memory from "../../processor/memory.singleton"
 
 export default class StopListenIntent extends IntentAbstract
 {
@@ -14,7 +14,7 @@ export default class StopListenIntent extends IntentAbstract
   execute(utterance:string): Array<IntentResponse>
   {
     let response = []
-    Config.setForce('listen', false)
+    Memory.setForce('listen', false)
 
     let possibleOutputs = [
       `Okay`,

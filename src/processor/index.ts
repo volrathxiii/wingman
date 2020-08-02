@@ -1,6 +1,6 @@
-import Config from "./config.singleton"
 import Services from "../services"
 import IntentClassifier from "../recognition/intent.classifier"
+import AcceptanceSubProcess from './subprocesses/acceptance.subprocess'
 
 export type ExecutionType = "intent" | "boot"
 
@@ -8,11 +8,17 @@ export default class Processor
 {
   private Services: Services
   private IntentClassifier: IntentClassifier
+  private subprocess: {
+    acceptance: AcceptanceSubProcess
+  }
   
   constructor()
   {
     this.Services = new Services()
     this.IntentClassifier = new IntentClassifier(this.Services)
+    this.subprocess = {
+      acceptance: new AcceptanceSubProcess()
+    }
   }
 
   private executeIntent(utterance:string)
@@ -35,6 +41,13 @@ export default class Processor
 
   execute(utterance:string, type:ExecutionType = "intent")
   {
-    if(type === "intent") return this.executeIntent(utterance)
+    try {
+      if(this.subprocess.acceptance.execute(utterance))
+      {
+        if(type === "intent") return this.executeIntent(utterance)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

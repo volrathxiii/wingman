@@ -1,4 +1,4 @@
-import Config from "../processor/config.singleton"
+import Memory from "../processor/memory.singleton"
 import * as Sentiment from "sentiment"
 
 export type UtterancesType = string[]
@@ -70,7 +70,7 @@ export abstract class IntentAbstract implements IntentInterface
 
   executeIntent(utterance:string): Array<IntentResponse>
   {
-    if(Config.get('listen') === true) return this.execute(utterance)
+    if(Memory.get('listen') === true) return this.execute(utterance)
     return []
   }
 

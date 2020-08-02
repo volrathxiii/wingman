@@ -1,0 +1,14 @@
+{
+  "name":"Samantha",
+  "listen": false,
+  "traits": {
+    "motivation": 2,
+    "diction":2,
+    "interest": [
+      {"label":"computers","level":1},
+      {"label":"technologies","level":1},
+      {"label":"politics","level":-2},
+      {"label":"sports","level":-1}
+    ]
+  }
+}

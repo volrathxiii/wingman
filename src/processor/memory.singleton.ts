@@ -1,12 +1,25 @@
 require('dotenv').config()
 
-class ConfigSingleton {
+import * as fs from 'fs'
+import * as path from 'path'
+
+class MemorySingleton {
   data:object
   constructor(){
-    this.data = {
-      listen: true,
-      name: process.env.WINGMAN_NAME || 'Wingman'
+    if(!this.loadMemory()) {
+      this.data = require(`${process.cwd()}/config.json`)
     }
+  }
+
+  private loadMemory():boolean
+  {
+    let file = path.join(process.env.TEMP_DIR, 'stored.memory.data.json')
+    if(fs.existsSync(file)) {
+      this.data = require(file)
+      return true
+    }
+
+    return false
   }
 
   get(config:string)
@@ -30,7 +43,7 @@ class ConfigSingleton {
   }
 }
 
-const ConfigSingletonInstance = new ConfigSingleton();
-Object.freeze(ConfigSingletonInstance);
+const MemorySingletonInstance = new MemorySingleton();
+Object.freeze(MemorySingletonInstance);
 
-export default ConfigSingletonInstance
+export default MemorySingletonInstance
