@@ -1,4 +1,6 @@
-src/node_modules
+node_modules/
+build/
 .DS_Store
 src/**/*.js
 tmp
+test

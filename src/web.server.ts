@@ -8,7 +8,7 @@ import * as path from 'path';
 const app = express()
 const port = process.env.WEBSERVER_PORT || 8080
 
-nunjucks.configure(path.join(__dirname, 'views'), {
+nunjucks.configure(path.join(process.cwd(), 'views'), {
   autoescape: true,
   express: app,
   watch: true
