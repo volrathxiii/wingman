@@ -1,7 +1,7 @@
-import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
+import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse, SystemIntentAbstract} from "../intent.abstract"
 import Memory from "../../processor/memory.singleton"
 
-export default class StopListenIntent extends IntentAbstract
+export default class StopListenIntent extends SystemIntentAbstract
 {
   label: string
 

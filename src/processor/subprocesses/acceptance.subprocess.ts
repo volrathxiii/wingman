@@ -37,7 +37,8 @@ export default class AcceptanceSubProcess extends SubProcessAbstract
         motivation: motivation,
         result: result
       })
-      throw new Error(`AcceptanceSubProcess: NOACCEPT`)
+      console.error(`AcceptanceSubProcess: NOACCEPT`)
+      return false
     }
   }
 }
