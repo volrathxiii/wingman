@@ -5,9 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:socket": "node ./build/socket.server.js",
-    "start:web": "node ./build/web.server.js",
-    "start": "npm install && (npm run start:socket & npm run start:web )"
+    "start-local:socket": "node ./build/socket.server.js --enable-source-maps",
+    "start-local:web": "node ./build/web.server.js --enable-source-maps",
+    "start-local": "npm install && (npm run start-local:socket & npm run start-local:web )",
+    "start-dev:socket": "pm2 start build/socket.server.js --watch",
+    "start-dev:web": "pm2 start build/web.server.js --watch",
+    "start-dev": "npm install && (npm run start-dev:socket & npm run start-dev:web )"
   },
   "author": "",
   "license": "ISC",
@@ -26,8 +29,8 @@
     "moment": "^2.27.0",
     "natural": "^2.1.5",
     "nunjucks": "^3.2.2",
+    "pm2": "^4.4.0",
     "sentiment": "^5.0.2",
-    "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "ws": "^7.3.1",
     "yargs": "^15.4.1"

@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-import {Server} from 'ws'
+import WebSocket,{Server} from 'ws'
 import Processor from "./processor"
 
 const port:number = parseInt(String(process.env.WEBSOCKET_PORT)) || 8081
@@ -21,11 +21,24 @@ wss.on('connection', ws=>{
   ws.on('message', async (message:string)=>{
     console.log(`Message: ${message}`)
     let data = JSON.parse(message)
-    let processed = await processor.execute(data.transcript)
-    if(processed === false || typeof processed === 'undefined') {
-      console.log(`UndefinedCommand: ${message}`)
+    
+    /**
+     * Worker
+     */
+    if(typeof data.info !== 'undefined') {
+      console.info(`Info: ${data.info}`)
       return false
     }
+
+    /**
+     * Intent
+     * Something here
+     */
+    let processed = await processor.execute(data.transcript)
+    // if(processed === false || typeof processed === 'undefined') {
+    //   console.info(`UndefinedCommand: ${message}`)
+    //   return false
+    // }
     processed.forEach(intent=>{
       let output = JSON.stringify({
         type: intent.constructor.name,
@@ -33,6 +46,13 @@ wss.on('connection', ws=>{
       })
       // Send reply
       console.log(`Reply: ${output}`)
+      // Broadcast to workers
+      wss.clients.forEach(function each(client) {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(output);
+        }
+      });
+  
       ws.send(output)
     })
   })

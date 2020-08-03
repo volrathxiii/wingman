@@ -7,7 +7,7 @@ let SentimentAnalyzer = require(`${process.cwd()}/node_modules/natural/lib/natur
 export default class AppreciationTrait extends TraitBaseAbstract
 {
   protected tokenizer: TreebankWordTokenizer
-  protected analyzer: any //??
+  protected analyzer: any//??
 
   constructor()
   {

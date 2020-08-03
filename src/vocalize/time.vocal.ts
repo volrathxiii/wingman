@@ -61,7 +61,6 @@ class TimeVocal
     }
 
     return formats[format]()
-
   }
 }
 

@@ -1,7 +1,7 @@
-what time is it?
-what is the time?
+what time is it
+what is the time
 time now
-give me the time?
+give me the time
 is it almost midnight
 is it almost noon
 is it almost morning
@@ -9,7 +9,7 @@ i don't know the time, maybe you know?
 i don't have a watch, does someone has a watch?
 i don't have a clock
 what's on the clock
-what's on your watch?
+what's on your watch
 is it late
 is it too early
 is it early
