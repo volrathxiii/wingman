@@ -5,12 +5,13 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install && tsc",
     "start-local:socket": "node ./build/socket.server.js --enable-source-maps",
     "start-local:web": "node ./build/web.server.js --enable-source-maps",
-    "start-local": "npm install && (npm run start-local:socket & npm run start-local:web )",
+    "start-local": "npm run build && (npm run start-local:socket & npm run start-local:web )",
     "start-dev:socket": "pm2 start build/socket.server.js --watch",
     "start-dev:web": "pm2 start build/web.server.js --watch",
-    "start-dev": "npm install && (npm run start-dev:socket & npm run start-dev:web )"
+    "start-dev": "npm run build && (npm run start-dev:socket & npm run start-dev:web )"
   },
   "author": "",
   "license": "ISC",
