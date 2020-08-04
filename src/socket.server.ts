@@ -4,13 +4,23 @@ import WebSocket,{Server} from 'ws'
 import Processor from "./processor"
 import pm2 from 'pm2'
 
+import express from 'express';
+import * as fs from 'fs';
+import * as https from 'https';
+const app = express()
+
+
+const SocketServer = https.createServer({
+  key: fs.readFileSync('cert/server.key'),
+  cert: fs.readFileSync('cert/server.cert')
+}, app)
+
+
 const port:number = parseInt(String(process.env.WEBSOCKET_PORT)) || 8081
 
 const processor = new Processor()
 
-const wss = new Server({port:port},()=>{
-  console.log(`WebSocket Port: ${port}`)
-})
+const wss = new Server({server:SocketServer})
 
 let manager = pm2.connect((err)=>{
   if (err) {
@@ -40,8 +50,6 @@ let manager = pm2.connect((err)=>{
   //   if (err) throw err
   // });
  
-
-
 })
 
 wss.on('connection', ws=>{
@@ -90,4 +98,9 @@ wss.on('connection', ws=>{
       ws.send(output)
     })
   })
+})
+
+
+SocketServer.listen(port, () => {
+  console.log(`WebSocket Port (secure): ${port}`)
 })

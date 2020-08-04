@@ -1,5 +1,5 @@
 'use strict';
-const ws = new WebSocket("ws://localhost:8081");
+const ws = new WebSocket(`wss://${location.hostname}:8081`);
 
 if ("webkitSpeechRecognition" in window) {
   var recognition = new window.webkitSpeechRecognition();
