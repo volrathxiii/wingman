@@ -1,4 +1,5 @@
 import WorkerAbstract from './worker.abstract'
+import {IntentSpeakResponse} from '../services/intent.abstract'
 
 export default class StopListenWorker extends WorkerAbstract
 {
@@ -7,9 +8,16 @@ export default class StopListenWorker extends WorkerAbstract
     super(`stoplisten`)
   }
 
-  MessageEvent(data:string, self: WorkerAbstract):void
+  MessageEvent(message:string, self: WorkerAbstract):void
   {
-    console.log(`WORKER`, data)
+    console.log(`WORKER`, message)
+    let data = JSON.parse(message)
+    
+    if(data.type === IntentSpeakResponse.name) {
+      console.log('setup timer')
+    } else {
+      console.log(`not set`)
+    }
   }
 
   Send(data:string|object):void

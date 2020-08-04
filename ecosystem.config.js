@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'webserver',
+    name: 'web.server',
     script: 'build/web.server.js',
     watch: ['build', 'public'],
     watch_delay: 1000,
@@ -9,7 +9,7 @@ module.exports = {
       "followSymlinks": false
     }
   }, {
-    name: 'socketserver',
+    name: 'socket.server',
     script: 'build/socket.server.js',
     watch: 'build/socket.server.js',
     watch_delay: 1000,
@@ -18,8 +18,17 @@ module.exports = {
       "followSymlinks": false
     }
   },{
+    name: 'memory.server',
+    script: 'build/memory/index.js',
+    watch: ['build/workers'],
+    watch_delay: 1000,
+    ignore_watch : ["node_modules", 'tmp'],
+    watch_options: {
+      "followSymlinks": false
+    }
+  },{
     name: 'stoplisten.worker',
-    script: 'build/workers/stoplisten.js',
+    script: 'build/workers/stoplisten.worker.js',
     watch: ['build/workers'],
     watch_delay: 1000,
     ignore_watch : ["node_modules", 'tmp'],
