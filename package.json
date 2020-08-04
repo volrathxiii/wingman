@@ -11,7 +11,10 @@
     "start-local": "npm run build && (npm run start-local:socket & npm run start-local:web )",
     "start-dev:socket": "pm2 start build/socket.server.js --watch",
     "start-dev:web": "pm2 start build/web.server.js --watch",
-    "start-dev": "npm run build && (npm run start-dev:socket & npm run start-dev:web )"
+    "start-dev": "npm run build && (npm run start-dev:socket & npm run start-dev:web )",
+    "start": "pm2 start ecosystem.config.js",
+    "stop": "pm2 stop ecosystem.config.js",
+    "restart": "pm2 restart ecosystem.config.js"
   },
   "author": "",
   "license": "ISC",
