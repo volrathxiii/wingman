@@ -1,5 +1,5 @@
 import {SystemIntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
-import Memory from "../../memory/memory.singleton"
+import {MemoryFetch, MemoryStore} from "../../memory/memory.client"
 import TimeVocal from '../../vocalize/time.vocal'
 import SentenceGenerator from '../../vocalize/index'
 const nlp = require('compromise')
@@ -20,12 +20,12 @@ export default class ListenIntent extends SystemIntentAbstract
     // Check for Person == Samantha/Config
     let command = nlp(utterance)
     let person = command.people().json().filter((person:any)=>{
-      return person.text === String(Memory.get('name')).toLowerCase()
+      return person.text === String(MemoryFetch('name')).toLowerCase()
     })
     
     if(person.length <= 0) return []
 
-    Memory.setForce('listen', true)
+    MemoryStore('listen', true)
 
     let timeVocal = new TimeVocal()
 

@@ -44,7 +44,7 @@ export default class MemoryClient
 }
 
 
-export function MemoryFetchAPI(config:string)
+function MemoryFetchAPI(config:string)
 {
   let memory = new MemoryClient()
   return memory.get(config)
@@ -52,15 +52,10 @@ export function MemoryFetchAPI(config:string)
 
 export let MemoryFetch = sp(MemoryFetchAPI)
 
-// const MemoryClientSDK = new MemoryClient()
+function MemoryStoreAPI(config:string, value:any)
+{
+  let memory = new MemoryClient()
+  return memory.set(config, value)
+}
 
-// setTimeout(()=>{
-//   MemoryClientSDK.set('listen','falsed')
-//     .then((body:any) => console.log(body, '--set'))
-// }, 2000)
-
-// setTimeout(async ()=>{
-//   let data = await MemoryClientSDK.get('listen')
-//   console.log(data, '--awaited')
-// }, 4000)
-
+export let MemoryStore = sp(MemoryStoreAPI)

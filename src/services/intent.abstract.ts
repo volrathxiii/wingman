@@ -1,5 +1,5 @@
-import Memory from "../memory/memory.singleton"
 import Sentiment from "sentiment"
+import {MemoryFetch} from '../memory/memory.client'
 
 export type UtterancesType = string[]
 export interface IntentResponse
@@ -71,7 +71,7 @@ export abstract class IntentAbstract implements IntentInterface
 
   executeIntent(utterance:string): Array<IntentResponse>
   {
-    if(Memory.get('listen') === true) return this.execute(utterance)
+    if(MemoryFetch('listen') === true) return this.execute(utterance)
     return []
   }
 

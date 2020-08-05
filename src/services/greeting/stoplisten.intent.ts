@@ -1,5 +1,5 @@
 import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse, SystemIntentAbstract} from "../intent.abstract"
-import Memory from "../../memory/memory.singleton"
+import {MemoryFetch, MemoryStore} from "../../memory/memory.client"
 
 export default class StopListenIntent extends SystemIntentAbstract
 {
@@ -14,7 +14,7 @@ export default class StopListenIntent extends SystemIntentAbstract
   execute(utterance:string): Array<IntentResponse>
   {
     let response = []
-    Memory.setForce('listen', false)
+    MemoryStore('listen', false)
 
     let possibleOutputs = [
       `Okay`,
