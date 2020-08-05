@@ -1,4 +1,4 @@
-import Memory from "../processor/memory.singleton"
+import Memory from "../memory/memory.singleton"
 import Sentiment from "sentiment"
 
 export type UtterancesType = string[]

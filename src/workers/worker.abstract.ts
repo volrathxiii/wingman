@@ -1,4 +1,5 @@
 require('dotenv').config()
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
 
 import WebSocket from 'ws'
 
@@ -17,7 +18,7 @@ export default abstract class WorkerAbstract implements WorkerInterface
   constructor(name:string)
   {
     this.name = name
-    this.socketHost = `ws://${process.env.WEBSOCKET_HOST}:${process.env.WEBSOCKET_PORT}`
+    this.socketHost = `wss://${process.env.WEBSOCKET_HOST}:${process.env.WEBSOCKET_PORT}`
     this.socket = new WebSocket(this.socketHost)
     let instance = this
 

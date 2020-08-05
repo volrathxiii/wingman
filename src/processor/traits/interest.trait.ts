@@ -1,6 +1,7 @@
 import {BayesClassifier} from 'natural'
 import TraitBaseAbstract, {TraitLevelParam} from './trait.abstract'
-import Memory from '../memory.singleton'
+import {MemoryFetch} from '../../memory/memory.client'
+
 
 type InterestParam = {
   label: string
@@ -18,8 +19,8 @@ export default class InterestTrait extends TraitBaseAbstract
   constructor(interests:Array<InterestParam> = [])
   {
     super(`interest`)
-    
-    if(interests.length === 0) interests = Memory.get(`traits`).interest
+    let traits:any = MemoryFetch(`traits`)
+    if(interests.length === 0) interests = traits.interest
     this.interests={}
     interests.forEach(interest=>{
       this.interests[interest.label] = this.levelToNumber(interest.level)

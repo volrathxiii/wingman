@@ -1,5 +1,5 @@
 import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse, SystemIntentAbstract} from "../intent.abstract"
-import Memory from "../../processor/memory.singleton"
+import Memory from "../../memory/memory.singleton"
 
 export default class StopListenIntent extends SystemIntentAbstract
 {

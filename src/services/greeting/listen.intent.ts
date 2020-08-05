@@ -1,5 +1,5 @@
 import {SystemIntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
-import Memory from "../../processor/memory.singleton"
+import Memory from "../../memory/memory.singleton"
 import TimeVocal from '../../vocalize/time.vocal'
 import SentenceGenerator from '../../vocalize/index'
 const nlp = require('compromise')

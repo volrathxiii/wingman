@@ -1,35 +1,43 @@
-// anything about the memory will be store here
+require('dotenv').config()
 
+import express from 'express'
 import pm2 from 'pm2'
+import bodyParser from 'body-parser'
+import  Memory from './memory.singleton'
 
-let manager = pm2.connect((err)=>{
+// ProcessManager
+pm2.connect((err)=>{
   if (err) {
-    console.error(err);
-    process.exit(2);
+    console.error(err)
+    process.exit(2)
   }
+})
 
-  pm2.list((err, list) => {
-    list.forEach(proc=>{
-      console.log(proc.name, proc.pid)
-    })
+// Server
+const app = express()
+const port = process.env.MEMORYSERVER_PORT || 8082
+
+app.use(bodyParser.json());
+
+app.get('/get/:configName', (req, res) => {
+  let result = Memory.get(req.params.configName)
+  console.info(`Get: ${req.params.configName} -> ${JSON.stringify(result)}`)
+
+  res.json({
+    status: 'ok',
+    data: result
   })
+})
 
-  // pm2.stop('app-name', (err, proc) => {
-  // })
-
-  // pm2.restart('app-name', (err, proc) => {
-  // })
-  
-  // pm2.start({
-  //   script    : 'app.js',         // Script to be run
-  //   exec_mode : 'cluster',        // Allows your app to be clustered
-  //   instances : 4,                // Optional: Scales your app by 4
-  //   max_memory_restart : '100M'   // Optional: Restarts your app if it reaches 100Mo
-  // }, function(err, apps) {
-  //   pm2.disconnect();   // Disconnects from PM2
-  //   if (err) throw err
-  // });
- 
+app.post('/set/:configName', (req, res) => {
+  console.info(`Set: ${req.params.configName} -> ${JSON.stringify(req.body)}`)
+  Memory.setForce(req.params.configName, req.body.value)
+  res.json({
+    status: 'ok'
+  })
+})
 
 
+app.listen(port, () => {
+  console.log(`MemoryServer Port: ${port}`)
 })

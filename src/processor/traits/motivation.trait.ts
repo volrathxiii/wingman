@@ -1,5 +1,5 @@
 import TraitBaseAbstract, {TraitLevelParam} from './trait.abstract'
-import Memory from '../memory.singleton'
+import {MemoryFetch} from '../../memory/memory.client'
 
 export default class MotivationTrait extends TraitBaseAbstract
 {
@@ -7,12 +7,14 @@ export default class MotivationTrait extends TraitBaseAbstract
   constructor(motivation:TraitLevelParam = 0)
   {
     super(`motivation`)
-    if(motivation === 0) motivation = Memory.get(`traits`).motivation
+    let traits:any = MemoryFetch('traits')
+    if(motivation === 0) motivation = traits.motivation
     this.motivation = (motivation+5)/10
   }
 
   process(utterance:string):number
   {
+
     return this.motivation
   }
 }

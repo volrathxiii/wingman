@@ -4,14 +4,14 @@ module.exports = {
     script: 'build/web.server.js',
     watch: ['build', 'public'],
     watch_delay: 1000,
-    ignore_watch : ["node_modules","build/workers", 'tmp'],
+    ignore_watch : ["node_modules","build/workers", "build/memory",'tmp'],
     watch_options: {
       "followSymlinks": false
     }
   }, {
     name: 'socket.server',
     script: 'build/socket.server.js',
-    watch: 'build/socket.server.js',
+    watch: ['build'],
     watch_delay: 1000,
     ignore_watch : ["node_modules",'tmp'],
     watch_options: {
@@ -20,7 +20,7 @@ module.exports = {
   },{
     name: 'memory.server',
     script: 'build/memory/index.js',
-    watch: ['build/workers'],
+    watch: ['build/memory'],
     watch_delay: 1000,
     ignore_watch : ["node_modules", 'tmp'],
     watch_options: {
