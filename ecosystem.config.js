@@ -8,6 +8,12 @@ module.exports = {
     ignore_watch : ["node_modules", "build/workers",'tmp'],
     watch_options: {
       "followSymlinks": false
+    },
+    env: {
+      "NODE_ENV": "development"
+    },
+    env_production: {
+        "NODE_ENV": "production",
     }
   },{
     name: 'socket.server',
@@ -28,6 +34,12 @@ module.exports = {
     ignore_watch : ["node_modules","build/workers", "build/memory",'tmp'],
     watch_options: {
       "followSymlinks": false
+    },
+    env: {
+      "NODE_ENV": "development"
+    },
+    env_production: {
+        "NODE_ENV": "production",
     }
   },{
     name: 'worker.server',

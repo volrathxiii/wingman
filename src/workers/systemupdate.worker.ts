@@ -25,6 +25,7 @@ export class SystemUpdateWorker extends WorkerAbstract
       if(this.checkUpdates())
       {
         console.info(`New updates available`)
+        this.applyUpdates()
       } else {
         console.info(`No new updates`)
       }
@@ -45,7 +46,10 @@ export class SystemUpdateWorker extends WorkerAbstract
 
   applyUpdates()
   {
-
+    MemoryStore(`listen`, false)
+    console.info(`Installing new updates...`)
+    executeGitCommand(`git pull`)
+    executeGitCommand(`npm run restart`)
   }
 }
 
