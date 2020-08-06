@@ -29,7 +29,7 @@ export class SystemUpdateWorker extends WorkerAbstract
       } else {
         console.info(`No new updates`)
       }
-    }, 1000 * 60 * 1 /* every 5 minutes */)
+    }, 1000 * 60 * 30 /* every 30 minutes */)
   }
 
   checkUpdates():boolean
