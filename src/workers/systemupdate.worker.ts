@@ -35,7 +35,7 @@ export class SystemUpdateWorker extends WorkerAbstract
   checkUpdates():boolean
   {
     if(MemoryFetch(`listen`) == 'true') return false
-    let gitfetch = executeGitCommand(`git fetch`)
+    executeGitCommand(`git fetch`)
     let gitHead = executeGitCommand(`git rev-parse HEAD`)
     let gitMaster = executeGitCommand(`git rev-parse origin/master`)
     if(gitHead != gitMaster) {
