@@ -1,7 +1,7 @@
 import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse, SystemIntentAbstract} from "../intent.abstract"
 import {MemoryFetch, MemoryStore} from "../../memory/memory.client"
 
-export default class StopListenIntent extends SystemIntentAbstract
+export default class StopListenIntent extends IntentAbstract
 {
   label: string
 

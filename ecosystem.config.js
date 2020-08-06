@@ -15,14 +15,14 @@ module.exports = {
     watch: ['build'],
     watch_delay: 1000,
     wait_ready: true,
-    ignore_watch : ["node_modules","build/workers",'tmp'],
+    ignore_watch : ["node_modules","build/workers","build/memory",'tmp'],
     watch_options: {
       "followSymlinks": false
     }
   },{
     name: 'web.server',
     script: 'build/web.server.js',
-    watch: ['build', 'public'],
+    watch: ['build/web.server.js', 'public'],
     watch_delay: 1000,
     wait_ready: true,
     ignore_watch : ["node_modules","build/workers", "build/memory",'tmp'],
@@ -32,7 +32,7 @@ module.exports = {
   },{
     name: 'worker.server',
     script: 'build/worker.server.js',
-    watch: ['build/worker.server.js'],
+    watch: ['build/worker.server.js',"build/workers"],
     watch_delay: 1000,
     wait_ready: true,
     ignore_watch : ["node_modules", 'tmp'],

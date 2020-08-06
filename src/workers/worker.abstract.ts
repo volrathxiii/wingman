@@ -5,8 +5,13 @@ import WebSocket from 'ws'
 
 export interface WorkerInterface
 {
+  /**
+   * Used to inject additional operations
+   * to worker
+   */
+  boot():void
   MessageEvent(data:string, self: WorkerAbstract):void
-  Send(data:string|object):void
+  OpenEvent(self: WorkerAbstract):void
 }
 
 export default abstract class WorkerAbstract implements WorkerInterface
@@ -35,7 +40,7 @@ export default abstract class WorkerAbstract implements WorkerInterface
 
   boot():void
   {
-    // Empty boot
+    // Null implementation
   }
 
   OpenEvent(self: WorkerAbstract):void
@@ -47,6 +52,8 @@ export default abstract class WorkerAbstract implements WorkerInterface
     self.socket.send(JSON.stringify(data))
   }
 
-  abstract MessageEvent(data:string, self: WorkerAbstract):void
-  abstract Send(data:string|object):void
+  MessageEvent(data:string, self: WorkerAbstract):void
+  {
+    // Null implementation
+  }
 }

@@ -30,13 +30,8 @@ export class AutoSleepWorker extends WorkerAbstract
       }
     }
   }
-
-  Send(data:string|object):void
-  {
-
-  }
 }
 
 // Initiate Worker
-let WorkerProcess = new AutoSleepWorker()
-export default WorkerProcess
+let AutoSleepWorkerProcess = new AutoSleepWorker()
+export default AutoSleepWorkerProcess
