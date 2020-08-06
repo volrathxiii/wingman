@@ -79,4 +79,5 @@ wss.on('connection', ws=>{
 
 SocketServer.listen(port, () => {
   console.log(`WebSocket Port (secure): ${port}`)
+  if(typeof process.send === 'function') process.send('ready');
 })

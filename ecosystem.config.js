@@ -1,36 +1,40 @@
 module.exports = {
   apps : [{
-    name: 'web.server',
-    script: 'build/web.server.js',
-    watch: ['build', 'public'],
+    name: 'memory.server',
+    script: 'build/memory/index.js',
+    watch: ['build/memory'],
     watch_delay: 1000,
-    ignore_watch : ["node_modules","build/workers", "build/memory",'tmp'],
+    wait_ready: true,
+    ignore_watch : ["node_modules", "build/workers",'tmp'],
     watch_options: {
       "followSymlinks": false
     }
-  }, {
+  },{
     name: 'socket.server',
     script: 'build/socket.server.js',
     watch: ['build'],
     watch_delay: 1000,
+    wait_ready: true,
     ignore_watch : ["node_modules","build/workers",'tmp'],
     watch_options: {
       "followSymlinks": false
     }
   },{
-    name: 'memory.server',
-    script: 'build/memory/index.js',
-    watch: ['build/memory'],
+    name: 'web.server',
+    script: 'build/web.server.js',
+    watch: ['build', 'public'],
     watch_delay: 1000,
-    ignore_watch : ["node_modules", 'tmp'],
+    wait_ready: true,
+    ignore_watch : ["node_modules","build/workers", "build/memory",'tmp'],
     watch_options: {
       "followSymlinks": false
     }
   },{
-    name: 'autosleep.worker',
-    script: 'build/workers/autosleep.worker.js',
-    watch: ['build/workers'],
+    name: 'worker.server',
+    script: 'build/worker.server.js',
+    watch: ['build/worker.server.js'],
     watch_delay: 1000,
+    wait_ready: true,
     ignore_watch : ["node_modules", 'tmp'],
     watch_options: {
       "followSymlinks": false

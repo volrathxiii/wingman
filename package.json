@@ -12,11 +12,11 @@
     "start-dev:socket": "pm2 start build/socket.server.js --watch",
     "start-dev:web": "pm2 start build/web.server.js --watch",
     "start-dev": "npm run build && (npm run start-dev:socket & npm run start-dev:web )",
-    "start": "npm run build && pm2 start ecosystem.config.js --watch",
+    "start": "npm run build && pm2 start ecosystem.config.js --watch --wait-ready",
     "stop": "pm2 stop ecosystem.config.js",
     "monitor": "pm2 monit",
     "logs": "pm2 logs",
-    "restart": "npm run build && pm2 restart ecosystem.config.js --watch",
+    "restart": "npm run build && pm2 restart ecosystem.config.js --watch --wait-ready",
     "delete": "pm2 delete all",
     "list": "pm2 list"
   },
@@ -43,6 +43,7 @@
     "pm2": "^4.4.0",
     "sentiment": "^5.0.2",
     "synchronized-promise": "^0.3.1",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "ws": "^7.3.1",
     "yargs": "^15.4.1"

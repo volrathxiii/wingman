@@ -40,4 +40,5 @@ app.post('/set/:configName', (req, res) => {
 
 app.listen(port, () => {
   console.log(`MemoryServer Port: ${port}`)
+  if(typeof process.send === 'function') process.send('ready');
 })

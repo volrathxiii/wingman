@@ -29,7 +29,13 @@ export default abstract class WorkerAbstract implements WorkerInterface
     this.socket.on('message',(msg:string)=>{
       instance.MessageEvent(msg,instance)
     })
+    
+    this.boot()
+  }
 
+  boot():void
+  {
+    // Empty boot
   }
 
   OpenEvent(self: WorkerAbstract):void
