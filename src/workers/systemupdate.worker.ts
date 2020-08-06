@@ -22,7 +22,12 @@ export class SystemUpdateWorker extends WorkerAbstract
   boot()
   {
     this.interval = setInterval(()=>{
-      this.checkUpdates()
+      if(this.checkUpdates())
+      {
+        console.info(`New updates available`)
+      } else {
+        console.info(`No new updates`)
+      }
     }, 1000 * 60 * 1 /* every 5 minutes */)
   }
 
@@ -30,9 +35,12 @@ export class SystemUpdateWorker extends WorkerAbstract
   {
     if(MemoryFetch(`listen`) == 'true') return false
     let gitfetch = executeGitCommand(`git fetch`)
-    console.log(gitfetch, `---git fetch`)
-
-    return true
+    let gitHead = executeGitCommand(`git rev-parse HEAD`)
+    let gitMaster = executeGitCommand(`git rev-parse origin/master`)
+    if(gitHead != gitMaster) {
+      return true
+    }
+    return false    
   }
 
   applyUpdates()
