@@ -13,7 +13,7 @@ module.exports = {
     script: 'build/socket.server.js',
     watch: ['build'],
     watch_delay: 1000,
-    ignore_watch : ["node_modules",'tmp'],
+    ignore_watch : ["node_modules","build/workers",'tmp'],
     watch_options: {
       "followSymlinks": false
     }
@@ -27,8 +27,8 @@ module.exports = {
       "followSymlinks": false
     }
   },{
-    name: 'stoplisten.worker',
-    script: 'build/workers/stoplisten.worker.js',
+    name: 'autosleep.worker',
+    script: 'build/workers/autosleep.worker.js',
     watch: ['build/workers'],
     watch_delay: 1000,
     ignore_watch : ["node_modules", 'tmp'],

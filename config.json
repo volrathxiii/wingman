@@ -1,6 +1,7 @@
 {
   "name":"Samantha",
   "listen": false,
+  "autosleep": 60,
   "traits": {
     "motivation": 2,
     "diction":2,

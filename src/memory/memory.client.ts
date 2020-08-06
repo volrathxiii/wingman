@@ -50,7 +50,7 @@ function MemoryFetchAPI(config:string)
   return memory.get(config)
 }
 
-export let MemoryFetch = sp(MemoryFetchAPI)
+export let MemoryFetch:any = sp(MemoryFetchAPI)
 
 function MemoryStoreAPI(config:string, value:any)
 {
@@ -58,4 +58,4 @@ function MemoryStoreAPI(config:string, value:any)
   return memory.set(config, value)
 }
 
-export let MemoryStore = sp(MemoryStoreAPI)
+export let MemoryStore:any = sp(MemoryStoreAPI)
