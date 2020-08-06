@@ -30,7 +30,7 @@ export class SystemUpdateWorker extends WorkerAbstract
   {
     if(MemoryFetch(`listen`) == 'true') return false
     let gitfetch = executeGitCommand(`git fetch`)
-    console.log(gitfetch, `--git fetch`)
+    console.log(gitfetch, `---git fetch`)
 
     return true
   }
