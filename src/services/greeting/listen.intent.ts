@@ -20,7 +20,7 @@ export default class ListenIntent extends SystemIntentAbstract
     // Check for Person == Samantha/Config
     let command = nlp(utterance)
     let person = command.people().json().filter((person:any)=>{
-      return person.text === String(MemoryFetch('name')).toLowerCase()
+      return String(person.text).toLowerCase() === String(MemoryFetch('name')).toLowerCase()
     })
     
     if(person.length <= 0) return []
