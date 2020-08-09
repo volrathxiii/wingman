@@ -25,8 +25,8 @@ app.get('/', function(req, res) {
 
 
 https.createServer({
-  key: fs.readFileSync('cert/server.key'),
-  cert: fs.readFileSync('cert/server.cert')
+  key: fs.readFileSync('cert/localhost.key'),
+  cert: fs.readFileSync('cert/localhost.crt')
 }, app).listen(port, () => {
   console.log(`WebServer Port: ${port}`)
   if(typeof process.send === 'function') process.send('ready');
