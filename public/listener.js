@@ -10,6 +10,10 @@ if ("webkitSpeechRecognition" in window) {
     console.log("Voice recognition started.");
   };
 
+  recognition.onerror = function(err) {
+    console.error(err)
+  };
+
   recognition.onend = function(arg) {
     if(recognitionEnabled) window.dispatchEvent(new CustomEvent("StartListen"));
   };
