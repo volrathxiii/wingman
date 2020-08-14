@@ -18,6 +18,7 @@ var loader;
 var filename;
 var fileChosen = false;
 var hasSetupUserMedia = false;
+let playing = false;
 
 //handle different prefix of the audio context
 var AudioContext = AudioContext || webkitAudioContext;
@@ -35,102 +36,12 @@ $(function () {
 	    initBinCanvas();	
 });
 
-// function handleFiles(files) {
-//     if(files.length === 0){
-//         return;
-//     }
-// 	fileChosen = true;
-//     setupAudioNodes();
-// 	var fileReader  = new FileReader();
-//     fileReader.onload = function(){
-//          var arrayBuffer = this.result;
-//          console.log(arrayBuffer);
-//          console.log(arrayBuffer.byteLength);
-		
-// 		 filename = files[0].name.toString();
-// 		filename = filename.slice(0, -4);
-// 		console.log(filename);
-
-// 		var url = files[0].urn || files[0].name;
-// 		ID3.loadTags(url, function() {
-// 			var tags = ID3.getAllTags(url);
-
-// //                    console.log(tags.title.toString().length);
-// //                    if (tags.title.length > 14) {
-// //                        var newTitle = tags.title.substring(0,14);
-// //                        newTitle += "...";
-// //                        $("#title").html(newTitle);
-// //                    }
-// //                    else {
-// //                        $("#title").html(tags.title);
-// //                    }
-// 			if (tags.title.length > 14 && tags.title.length <= 17) {
-
-// 				$("#title").css("font-size", "7.5vh");
-				
-// 			}
-// 			if (tags.title.length > 17 && tags.title.length <= 20) {
-				
-// 				$("#title").css("font-size", "6.5vh");
-// 			}
-			
-// 			if (tags.title.length > 20) {
-				
-// 				$("#title").css("font-size", "5vh");
-				
-// 			}
-			
-// 			$("#title").html(tags.title);
-			
-// 			onWindowResize();
-
-// 			$("#title").css("visibility", "visible");
-
-// 			$("#artist").html(tags.artist);
-// 			$("#artist").css("visibility", "visible");
-// 			$("#album").html(tags.album);
-// 			$("#album").css("visibility", "visible");
-// 		  }, {
-// 			tags: ["title","artist","album","picture"],
-// 			dataReader: ID3.FileAPIReader(files[0])
-// 		  });
-		
-//      };
-//      fileReader.readAsArrayBuffer(files[0]);
-//      var url = URL.createObjectURL(files[0]); 
-	
-// 	var request = new XMLHttpRequest();
-	
-// 	request.addEventListener("progress", updateProgress);
-// 	request.addEventListener("load", transferComplete);
-// 	request.addEventListener("error", transferFailed);
-// 	request.addEventListener("abort", transferCanceled);
-	
-// 	request.open('GET', url, true);
-// 	request.responseType = 'arraybuffer';
-
-//  	// When loaded decode the data
-// 	request.onload = function() {
-// 		// decode the data
-// 		context.decodeAudioData(request.response, function(buffer) {
-// 		// when the audio is decoded play the sound
-// 		sourceNode.buffer = buffer;
-// 		sourceNode.start(0);
-// 		$("#freq, body").addClass("animateHue");
-// 		//on error
-// 		}, function(e) {
-// 			console.log(e);
-// 		});
-// 	};
-// 	request.send();
-	
-// 	$("button, input").prop("disabled",true);
-// }
 
 function playVoice() {
 	let file = document.getElementById('playButton').getAttribute('data-src')
 	fileChosen = true;
-    setupAudioNodes();
+	playing = true;
+  setupAudioNodes();
 	
 	var request = new XMLHttpRequest();
 	
@@ -155,7 +66,15 @@ function playVoice() {
 		context.decodeAudioData(request.response, function(buffer) {
 			// when the audio is decoded play the sound
 			sourceNode.buffer = buffer;
+			sourceNode.onended = function() {
+				setTimeout(()=>{
+					playing = false;
+					console.log('ended')
+				},1000)
+			}
 			sourceNode.start(0);
+			
+			
 			$("#freq, body").addClass("animateHue");
 			//on error
 			}, function(e) {
@@ -250,14 +169,14 @@ function initBinCanvas () {
 	window.addEventListener( 'load', onWindowResize, false );
 	
 	//create gradient for the bins
-	var gradient = ctx.createLinearGradient(0, c.height - 300,0,window.innerHeight - 25);
-	gradient.addColorStop(1,'#00f'); //black
-	gradient.addColorStop(0.75,'#f00'); //red
-	gradient.addColorStop(0.25,'#f00'); //yellow
-	gradient.addColorStop(0,'#ffff00'); //white
+	// var gradient = ctx.createLinearGradient(0, c.height - 300,0,window.innerHeight - 25);
+	// gradient.addColorStop(1,'#00f'); //black
+	// gradient.addColorStop(0.75,'#f00'); //red
+	// gradient.addColorStop(0.25,'#f00'); //yellow
+	// gradient.addColorStop(0,'#ffff00'); //white
 
 	
-	ctx.fillStyle = "#9c0001";
+	// ctx.fillStyle = "#9c0001";
 }
 
 function onWindowResize()
@@ -303,20 +222,18 @@ function reset () {
 
 
 function updateVisualization () {
-        
+  
 	// get the average, bincount is fftsize / 2
 	if (fileChosen || hasSetupUserMedia) {
 		var array = new Uint8Array(analyser.frequencyBinCount);
 		analyser.getByteFrequencyData(array);
 
-		// console.log(array)
-
 		drawBars(array);
 	}
-       // setTextAnimation(array);
-    
-
-	rafID = window.requestAnimationFrame(updateVisualization);
+	// Stop animating once playing ended
+	if(playing){
+		rafID = window.requestAnimationFrame(updateVisualization);
+	}
 }
 
 function drawBars (array) {
