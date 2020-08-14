@@ -1,4 +1,4 @@
-import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse, SystemIntentAbstract} from "../intent.abstract"
+import {IntentAbstract, IntentVoiceResponse, IntentViewRespose, IntentResponse, SystemIntentAbstract} from "../intent.abstract"
 import {MemoryFetch, MemoryStore} from "../../memory/memory.client"
 
 export default class StopListenIntent extends IntentAbstract
@@ -35,7 +35,7 @@ export default class StopListenIntent extends IntentAbstract
     var output = possibleOutputs[Math.floor(Math.random() * possibleOutputs.length)];
     
     response.push(new IntentViewRespose(`${this.service}-${this.label}`, output))
-    response.push(new IntentSpeakResponse(String(output)))
+    response.push(new IntentVoiceResponse(String(output)))
 
     return response
   }

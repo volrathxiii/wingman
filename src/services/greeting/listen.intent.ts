@@ -1,4 +1,4 @@
-import {SystemIntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
+import {SystemIntentAbstract, IntentViewRespose, IntentResponse, IntentVoiceResponse} from "../intent.abstract"
 import {MemoryFetch, MemoryStore} from "../../memory/memory.client"
 import TimeVocal from '../../vocalize/time.vocal'
 import SentenceGenerator from '../../vocalize/index'
@@ -35,8 +35,10 @@ export default class ListenIntent extends SystemIntentAbstract
     )
     
     response.push(new IntentViewRespose(this.getTag(), Sentence))
-    response.push(new IntentSpeakResponse(Sentence))
+    response.push(new IntentVoiceResponse(Sentence))
 
     return response
   }
+
 }
+

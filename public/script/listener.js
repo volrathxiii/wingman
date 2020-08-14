@@ -11,7 +11,7 @@ if ("webkitSpeechRecognition" in window) {
   };
 
   recognition.onerror = function(err) {
-    console.error(err)
+    if(err.error !== 'no-speech') console.log(err)
   };
 
   recognition.onend = function(arg) {
@@ -65,15 +65,17 @@ if ("webkitSpeechRecognition" in window) {
   }
   
   const ViewResponse = function(id,view) {
-    let viewElement = document.getElementById(id)
-    if(!viewElement) {
-      viewElement = document.createElement("DIV");
-      viewElement.setAttribute('id', id)
-      viewElement.innerHTML = view
-      document.body.appendChild(viewElement)
-    } else {
-      viewElement.innerHTML = view
-    }
+
+    let systemLogs = document.getElementById('systemLogs')
+
+    let viewElement = document.createElement("DIV");
+    viewElement.setAttribute('data-type', id)
+    viewElement.innerHTML = view
+    // systemLogs.appendChild(viewElement)
+
+    systemLogs.insertBefore(viewElement, systemLogs.firstChild);
+
+    // remove older if more than 50
   }
   
   ws.addEventListener("open", ()=>{
@@ -85,6 +87,7 @@ if ("webkitSpeechRecognition" in window) {
   
     if(response.type === "IntentViewRespose") ViewResponse(response.data.id, response.data.html)
     if(response.type === "IntentSpeakResponse") SpeakResponse(response.data)
+    if(response.type === "IntentVoiceResponse") speakResponse(response.data)
   })
 
   SpeakResponse(``)

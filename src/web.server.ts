@@ -14,7 +14,6 @@ nunjucks.configure(path.join(process.cwd(), 'views'), {
   watch: true
 });
 
-
 app.use('/public', express.static('public'))
 
 app.get('/', function(req, res) {
@@ -22,7 +21,6 @@ app.get('/', function(req, res) {
     app_name: 'Wingman'
   });
 });
-
 
 https.createServer({
   key: fs.readFileSync('cert/localhost.key'),

@@ -1,4 +1,4 @@
-import {IntentAbstract, IntentSpeakResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
+import {IntentAbstract, IntentVoiceResponse, IntentViewRespose, IntentResponse} from "../intent.abstract"
 import Moment from 'moment'
 import TimeVocal from '../../vocalize/time.vocal'
 import SentenceGenerator from '../../vocalize/index'
@@ -27,7 +27,7 @@ export default class TimeNowIntent extends IntentAbstract
     )
     
     response.push(new IntentViewRespose(`${this.service}-${this.label}`, time))
-    response.push(new IntentSpeakResponse(Sentence))
+    response.push(new IntentVoiceResponse(Sentence))
 
     return response
   }

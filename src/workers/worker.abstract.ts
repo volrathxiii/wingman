@@ -10,7 +10,20 @@ export interface WorkerInterface
    * to worker
    */
   boot():void
+
+  /**
+   * Triggered everytime a message is
+   * broadcasted over sockets
+   * @param data 
+   * @param self 
+   */
   MessageEvent(data:string, self: WorkerAbstract):void
+
+  /**
+   * Triggers when a connection to
+   * websocket is established
+   * @param self 
+   */
   OpenEvent(self: WorkerAbstract):void
 }
 

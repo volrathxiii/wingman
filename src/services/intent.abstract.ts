@@ -1,6 +1,6 @@
 import Sentiment from "sentiment"
 import {MemoryFetch} from '../memory/memory.client'
-
+import VoiceGenerator from '../vocalize/voice.generator'
 export type UtterancesType = string[]
 export interface IntentResponse
 {
@@ -28,6 +28,16 @@ export class IntentSpeakResponse implements IntentResponse
   }
 }
 
+export class IntentVoiceResponse implements IntentResponse
+{
+  data: string
+  constructor(message:string)
+  {
+    let voice = new VoiceGenerator()
+    let voiceFile = voice.getVoice(message)
+    this.data = voiceFile
+  }
+}
 
 
 export interface IntentInterface {
