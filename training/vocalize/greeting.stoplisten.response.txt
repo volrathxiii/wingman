@@ -1,0 +1,18 @@
+Okay.
+I'll keep quiet now.
+So be it.
+Let me know if you need anything.[2]
+Don't be a stranger, Ok?[1]
+Enabling quiet mode.
+Ahh! Thank you!
+Finally!
+See ya!
+Talk soon![1]
+Bye!
+I'll be here if you need me.
+Just call me when you need me.
+Alrighty!
+Fuck yeah![-1]
+Have it your way![-1]
+I don't need stupid people like you anyway.[-2]
+Don't fucking talk me again.[-1]

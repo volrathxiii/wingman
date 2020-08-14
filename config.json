@@ -4,7 +4,8 @@
   "autosleep": 60,
   "traits": {
     "motivation": 2,
-    "diction":2,
+    "diction":1,
+    "positivity":0,
     "interest": [
       {"label":"computers","level":1},
       {"label":"technologies","level":1},

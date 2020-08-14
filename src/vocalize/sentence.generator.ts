@@ -1,6 +1,7 @@
 
 import SentimentModule from "sentiment"
 import * as fs from 'fs'
+import {MemoryFetch} from '../memory/memory.client'
 
 /**
  * Expose Sentiment Class so users 
@@ -63,6 +64,7 @@ export class SentenceLearning
 
   protected analize(text:string)
   {
+    console.log(text, this.sentiment.analize(text))
     return this.sentiment.analize(text)
   }
 
@@ -88,8 +90,18 @@ export class SentenceLearning
   train()
   {
     this.trainData.forEach((data)=>{
-      let result = this.analize(data.template)
-      let template:TemplateData = Object.assign({},data, {score:result.score});
+      // set score based on txt file
+      let rx = /\[(1|-1|0|2|-2)\]/
+      let score:number = 0
+      let match = String(data.template).match(rx)
+      if(match) {
+        data.template = data.template.replace(rx,'')
+        score = parseInt(match[1])
+      } else {
+        let result = this.analize(data.template)
+        score = result.score
+      }
+      let template:TemplateData = Object.assign({},data, {score:score});
       this.templates.push(template)
     })
   }
@@ -116,13 +128,21 @@ export default class SentenceGenerator extends SentenceLearning
 {
   private getTemplates(classification:string, score:number)
   {
+    let traits:any = MemoryFetch('traits')
+    
+    let positivity = parseInt(traits.positivity)
+    let diction = parseInt(traits.diction)
+    score += positivity
+
+    let scoreRange = [score,score+diction].sort(function(a,b) { return a - b; })
+    
     return this.templates.filter((template)=>{
-      return template.classification === classification && (template.score <= score+1 && template.score >= score-1)
+      return template.classification === classification && (template.score <= scoreRange[1] && template.score >= scoreRange[0])
     })
   }
 
   generate(classification:string, variables:{[key:string]: string} = {}, sentiment: number|string = 0):string
-  {
+  { 
     if(typeof sentiment === 'string') sentiment = this.analize(sentiment).score
 
     let templates = this.getTemplates(classification, sentiment)

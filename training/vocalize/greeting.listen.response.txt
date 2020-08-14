@@ -1,29 +1,29 @@
-good {time}, im listening
-good {time}, im here
-good {time}
-good {time} beautiful day, right?
-hey
-how can i help?
-can i help you?
-what do you need?
-hello
-hi
-very nice {time} would you agree
-hi. good {time}
-having a bad fucking day?
-what is it?
-yes?
-talk to me
-im here
-im listening
-can i help you with anything?
-what is on your mind?
-need anything?
-let me know what you want
-let me know what you need
-what?
-if im not a computer i wouldn't entertain your bad attitude
-what do you want asshole?
-hey sunshine!
-having a great day?
-having a bad {time}?
+Good {time}!, I'm listening.
+Good {time}, I'm here
+Good {time}
+Good {time}. Beautiful day, right?[2]
+Hey!
+How can i help?
+Can i help you?
+What do you need?
+Hello!
+Hi!
+Very nice {time}, would you agree?[2]
+Hi. good {time}.
+Having a bad fucking day?[-2]
+What is it?
+Yes?
+Talk to me.
+I'm here.
+I'm listening.
+Can i help you with anything?[1]
+What is on your mind?
+Need anything?
+Let me know what you want.
+Let me know what you need.
+What? [-1]
+If im not a computer i wouldn't entertain your bad attitude.[-1]
+What do you want asshole?[-2]
+Hey sunshine![1]
+Having a great day?[2]
+Having a bad {time}?[-1]
