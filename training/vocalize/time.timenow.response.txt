@@ -18,7 +18,7 @@ it is {time} awesome![1]
 the time is {time}, Great master.[1]
 Your highness, its already {time}.[2]
 Tts {time}.
-{time} stupid asshole.[1]
+{time} stupid asshole.[-1]
 Tts {time} next time look at your damn watch. [-1]
 Not answering that loser!![2]
 Wait! give me a second. Im trying to find my watch. Ah there! it is {time}.
