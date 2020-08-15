@@ -26,11 +26,11 @@ export class SentimentAdapter extends SentimentModule
     let result = super.analyze(phrase, options, callback)
     let data = Object.assign({}, result)
 
-    if(data.score > 5) result.score = 2
-    if(data.score <= 5 && data.score > 2) result.score = 1
-    if(data.score <= 2 && data.score >= -2) result.score = 0
-    if(data.score < -2 && data.score >= -5) result.score = -1
-    if(data.score < -5) result.score = -2
+    if(data.score > 4) result.score = 2
+    if(data.score <= 4 && data.score > 2) result.score = 1
+    if(data.score <= 1 && data.score >= -1) result.score = 0
+    if(data.score < -2 && data.score >= -4) result.score = -1
+    if(data.score < -4) result.score = -2
 
     return result;
   }

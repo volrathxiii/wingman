@@ -12,12 +12,12 @@ Hey! awesome, its {time}.
 {time} by my clock.
 {time} by my watch.
 Its about {time}.
-{time} and i hope your doing great.[2]
-it is {time}.
-it is {time} awesome![1]
-the time is {time}, Great master.[1]
+{time} and I hope your doing good.[2]
+It is {time}.
+It is {time} awesome![1]
+The time is {time}, Great master.[1]
 Your highness, its already {time}.[2]
-Tts {time}.
+Its {time}.
 {time} stupid asshole.[-1]
 Tts {time} next time look at your damn watch. [-1]
 Not answering that loser!![2]

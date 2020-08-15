@@ -12,6 +12,18 @@ export default class VoiceGenerator
     this.voiceOutputPath = `${process.cwd()}/public/voices`
   }
 
+  addslashes(str:string) {
+    return str.replace(/\\/g, '\\\\').
+        replace(/\u0008/g, '\\b').
+        replace(/\t/g, '\\t').
+        replace(/\n/g, '\\n').
+        replace(/\f/g, '\\f').
+        replace(/\r/g, '\\r').
+        replace(/'/g, '\\\'').
+        replace(/"/g, '\\"');
+}
+
+
   getVoice(sentence:string)
   {
     try {
@@ -19,8 +31,10 @@ export default class VoiceGenerator
       if(fs.existsSync(`${this.voiceOutputPath}/${filehash}.mp3`)) {
         return `/public/voices/${filehash}.mp3`
       } else {
-        let execute = execSync(`${this.voiceGeneratorPath} ${sentence}`)
-        console.log(execute)
+        
+        console.log(`Getting voice for '${this.addslashes(sentence)}'`)
+        let execute = execSync(`${this.voiceGeneratorPath} ${this.addslashes(sentence)}`)
+        console.log(execute.toString())
         fs.renameSync(
           `${process.cwd()}/bin/voice.mp3`,
           `${this.voiceOutputPath}/${filehash}.mp3`
