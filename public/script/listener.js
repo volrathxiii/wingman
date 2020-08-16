@@ -1,6 +1,34 @@
 'use strict';
 const ws = new WebSocket(`wss://${location.hostname}:8081`);
 
+
+let timerInterval;
+class RecordTimer
+{
+  constructor()
+  {
+    window.recordCounter = 0;
+  }
+
+  reset()
+  {
+    clearInterval(timerInterval)
+    window.recordCounter = 0;
+    document.getElementById('recordTimer').innerHTML = window.recordCounter
+  }
+
+  start()
+  {
+    this.reset()
+    timerInterval = setInterval(()=>{
+      window.recordCounter += 1
+      document.getElementById('recordTimer').innerHTML = window.recordCounter
+    }, 1000)
+  }
+}
+
+let recordTimer = new RecordTimer()
+
 if ("webkitSpeechRecognition" in window) {
   var recognition = new window.webkitSpeechRecognition();
   let recognitionEnabled = true
@@ -8,6 +36,7 @@ if ("webkitSpeechRecognition" in window) {
   // This will run when the speech recognition service returns a result
   recognition.onstart = function() {
     console.log("Voice recognition started.");
+    recordTimer.start()
   };
 
   recognition.onerror = function(err) {

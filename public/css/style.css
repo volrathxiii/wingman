@@ -17,7 +17,7 @@
   }
 }
 #freq {
-    background: linear-gradient(#ff0088, red);
+    background: linear-gradient(#00e7ff, #0064ff);
     position: absolute; 
     left: 0;
     right: 0;
@@ -161,3 +161,35 @@ div#systemLogs > * {
   color: white;
 }
 
+/* mic notifier */
+.recording-box {
+  padding-top: 10px;
+  padding-right: 10px;
+  width: 35px;
+  height: 35px;
+  color: white;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.icon-mic {
+  width: 35px;
+  height: 35px;
+  opacity: 0.8;
+}
+.counter {
+  width: 35px;
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  font-family: "Roboto", sans-serif;
+  font-size: 17px;
+  color: #535353;
+  font-weight: bold;
+  top: 14px;
+  left: 0;
+
+}
+.icon-mic svg{
+  fill: white;
+}

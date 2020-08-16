@@ -70,12 +70,12 @@ function playVoice() {
 				setTimeout(()=>{
 					playing = false;
 					console.log('ended')
-				},1000)
+				},1800)
 			}
 			sourceNode.start(0);
 			
 			
-			$("#freq, body").addClass("animateHue");
+			// $("#freq, body").addClass("animateHue");
 			//on error
 			}, function(e) {
 				console.log(e);
@@ -112,7 +112,7 @@ function useMic()
 		$("#artist").html("Using");
 		onWindowResize();
 		$("#title, #artist, #album").css("visibility", "visible");
-		$("#freq, body").addClass("animateHue");
+		// $("#freq, body").addClass("animateHue");
 	})
 	.catch(function(err) {
 	  /* handle the error */
@@ -207,7 +207,8 @@ function setupAudioNodes() {
 	// and connect source to destination
 	sourceNode.connect(context.destination);
 	//start updating
-	rafID = window.requestAnimationFrame(updateVisualization);
+	// rafID = window.requestAnimationFrame();
+	updateVisualization()
 }
 
 
@@ -276,11 +277,8 @@ function drawBars (array) {
 		
 		var value = array[i];
 		if (value >= threshold) {			
-			//draw bin
-			//ctx.fillRect(0 + i * space, c.height - value, 2 , c.height);
-                        //ctx.fillRect(i * space, c.height, 2, -value);
-                        ctx.fillRect(0, radius, $(window).width() <= 450 ? 2 : 3, -value / bar_length_factor);
-                        ctx.rotate((180 / 128) * Math.PI/180);   
+			ctx.fillRect(0, radius, $(window).width() <= 450 ? 2 : 3, -value / bar_length_factor);
+			ctx.rotate((180 / 128) * Math.PI/180);   
 		}
 	}  
         
@@ -288,7 +286,6 @@ function drawBars (array) {
 
 		var value = array[i];
 		if (value >= threshold) {				
-
 			//draw bin
 			//ctx.fillRect(0 + i * space, c.height - value, 2 , c.height);
 						//ctx.fillRect(i * space, c.height, 2, -value);
