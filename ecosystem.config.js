@@ -51,6 +51,16 @@ module.exports = {
     watch_options: {
       "followSymlinks": false
     }
+  },{
+    name: 'listener.server',
+    script: 'speech.listener.js',
+    watch: ['build'],
+    watch_delay: 1000,
+    wait_ready: true,
+    ignore_watch : ["node_modules","build/workers","build/memory",'tmp'],
+    watch_options: {
+      "followSymlinks": false
+    }
   },],
 
   deploy : {

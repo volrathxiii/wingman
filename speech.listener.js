@@ -1,3 +1,15 @@
+require('dotenv').config()
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
+
+const WebSocket = require('ws')
+
+let socketHost = `wss://${process.env.WEBSOCKET_HOST}:${process.env.WEBSOCKET_PORT}`
+let socket = new WebSocket(socketHost)
+
+socket.on(`open`,(ws)=>{
+	console.log(`Listener connected to WebSocket Server`)
+})
+
 const DeepSpeech = require('deepspeech');
 const VAD = require('node-vad');
 const mic = require('mic');
@@ -26,7 +38,7 @@ function createModel(modelDir) {
 	// let modelPath = modelDir + '.pbmm';
 	let scorerPath = modelDir + '.scorer';
 	// let scorerPath = `${process.cwd()}/../DeepSpeech/wingman/kenlm.scorer`
-	let modelPath = `${process.cwd()}/../DeepSpeech/wingman/train/output_graph.pbmm`
+	let modelPath = `${process.cwd()}/bin/stt/output_graph.pbmm`
 	let model = new DeepSpeech.Model(modelPath);
 	model.enableExternalScorer(scorerPath);
 	return model;
@@ -117,7 +129,7 @@ function processSilence(data, callback) {
 		}
 	}
 	else {
-		process.stdout.write('.'); // silence detected while not recording
+		// process.stdout.write('.'); // silence detected while not recording
 		bufferSilence(data);
 	}
 }
@@ -172,6 +184,8 @@ function finishStream() {
 		let start = new Date();
 		let text = modelStream.finishStream();
 		if (text) {
+			// Send to socket server
+			socket.send(JSON.stringify({transcript: text}))
 			let recogTime = new Date().getTime() - start.getTime();
 			return {
 				text,

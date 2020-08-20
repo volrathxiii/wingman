@@ -7,7 +7,7 @@ tmp/*
 test
 token
 public/voices/*.mp3
-bin/stt/*.pbmm
-bin/stt/*.pb
-bin/stt/*.scorer
-bin/stt/*.tflite
+bin/stt/deepspeech*.pbmm
+bin/stt/deepspeech*.pb
+bin/stt/deepspeech*.scorer
+bin/stt/deepspeech*.tflite

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="systemLogs" class="dialog"></div>
+    <!-- <input type="file" id="input" onchange="handleFiles(this.files)"/> -->
+    <button id="playButton" type="button" style="display: none;" data-src="../public/audio/voice.mp3" onClick="playVoice()">Play Voice</button>
+		<!-- <button id="useMicButton" type="button" onClick="useMic()">Use Microphone</button> -->
+    <span id="loading"></span>
+    <div id="song_info_wrapper">
+      <div id="artist"></div>
+      <div id="title">Samantha</div>
+      <div id="album"></div>
+    </div>
+    <canvas id="freq" width="1024" height="525"></canvas>
+
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="../public/script/bufferloader.js"></script>
+    <script src="../public/script/id3-minimized.js"></script>
+    <script src="../public/script/audiovisualisierung.js"></script>
+    <script src="../public/script/app.listener.js" type="text/javascript"></script>
+  </body>
+</html>
