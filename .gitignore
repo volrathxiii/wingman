@@ -7,3 +7,7 @@ tmp/*
 test
 token
 public/voices/*.mp3
+bin/stt/*.pbmm
+bin/stt/*.pb
+bin/stt/*.scorer
+bin/stt/*.tflite
