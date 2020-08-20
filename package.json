@@ -50,7 +50,6 @@
     "nunjucks": "^3.2.2",
     "pm2": "^4.4.0",
     "sentiment": "^5.0.2",
-    "speaker": "^0.5.1",
     "synchronized-promise": "^0.3.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
