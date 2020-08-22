@@ -38,7 +38,8 @@ function createModel(modelDir) {
 	// let modelPath = modelDir + '.pbmm';
 	let scorerPath = modelDir + '.scorer';
 	// let scorerPath = `${process.cwd()}/../DeepSpeech/wingman/kenlm.scorer`
-	let modelPath = `${process.cwd()}/bin/stt/output_graph.pbmm`
+	let modelPath = `${process.cwd()}/bin/stt/output_graph.tflite`
+	if(process.platform === 'darwin') modelPath = `${process.cwd()}/bin/stt/output_graph.pbmm`
 	let model = new DeepSpeech.Model(modelPath);
 	model.enableExternalScorer(scorerPath);
 	return model;
