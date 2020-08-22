@@ -15,8 +15,10 @@ def handle_led():
   channel = 16
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(channel, GPIO.OUT)
-  GPIO.output(16, CLI_ARGS.enable)
-  return GPIO.channel(channel)
+  if not CLI_ARGS.enable:
+    GPIO.output(channel, False)
+  else:
+    GPIO.output(channel, True)
 
 def handle_args():
     parser = argparse.ArgumentParser(
