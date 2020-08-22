@@ -1,5 +1,6 @@
 require('dotenv').config()
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
+const spawn = require("child_process").spawn;
 
 const WebSocket = require('ws')
 
@@ -119,6 +120,7 @@ function processSilence(data, callback) {
 			let now = new Date().getTime();
 			if (now - silenceStart > SILENCE_THRESHOLD) {
 				silenceStart = null;
+				let lightoff = spawn('python3',[`${process.cwd()}/bin/gpio/mic.listener.py`, '--enable 0']);
 				console.log('[end]');
 				let results = intermediateDecode();
 				if (results) {
@@ -163,6 +165,7 @@ function processVoice(data) {
 	silenceStart = null;
 	if (recordedChunks === 0) {
 		console.log('');
+		let lighton = spawn('python3',[`${process.cwd()}/bin/gpio/mic.listener.py`, '--enable 1']);
 		process.stdout.write('[start]'); // recording started
 	}
 	else {

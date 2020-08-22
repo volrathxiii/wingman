@@ -12,12 +12,14 @@ def handle_led():
   except ModuleNotFoundError:
       print('Unable to load RPi.GPIO')
       sys.exit(1)
+
   channel = 16
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(channel, GPIO.OUT)
-  if not CLI_ARGS.enable:
+  if CLI_ARGS.enable == 0:
     GPIO.output(channel, False)
-  else:
+    GPIO.cleanup()
+  elif CLI_ARGS.enable == 1:
     GPIO.output(channel, True)
 
 def handle_args():
@@ -26,9 +28,9 @@ def handle_args():
     )
     parser.add_argument(
         "--enable",
-        type=bool,
-        default=False,
-        help="Enables LED if true",
+        type=int,
+        default=-1,
+        help="Enables/disables LED",
     )
     return parser.parse_args()
 
