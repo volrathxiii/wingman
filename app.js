@@ -3,8 +3,8 @@ const { app, BrowserWindow } = require('electron')
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
     webPreferences: {
       nodeIntegration: true
     },
@@ -12,13 +12,18 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  win.setFullScreen(true)
+  // win.setFullScreen(true)
   win.loadFile('views/app.html')
 
   // Open the DevTools.
   win.webContents.openDevTools()
 }
+app.commandLine.appendSwitch('ignore-gpu-blacklist')
+app.commandLine.appendSwitch('enable-gpu-rasterization')
+app.commandLine.appendSwitch('enable-oop-rasterization')
+app.commandLine.appendSwitch('audio-buffer-size', '2048')
 
+// audio-buffer-size 
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true')
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true')
 

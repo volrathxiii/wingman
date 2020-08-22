@@ -24,6 +24,12 @@ module.exports = {
     ignore_watch : ["node_modules","build/workers","build/memory",'tmp'],
     watch_options: {
       "followSymlinks": false
+    },
+    env: {
+      "NODE_ENV": "development"
+    },
+    env_production: {
+        "NODE_ENV": "production",
     }
   },{
     name: 'web.server',
@@ -50,6 +56,12 @@ module.exports = {
     ignore_watch : ["node_modules", 'tmp'],
     watch_options: {
       "followSymlinks": false
+    },
+    env: {
+      "NODE_ENV": "development"
+    },
+    env_production: {
+        "NODE_ENV": "production",
     }
   },{
     name: 'listener.server',
@@ -60,6 +72,12 @@ module.exports = {
     ignore_watch : ["node_modules","build/workers","build/memory",'tmp'],
     watch_options: {
       "followSymlinks": false
+    },
+    env: {
+      "NODE_ENV": "development"
+    },
+    env_production: {
+        "NODE_ENV": "production",
     }
   },],
 

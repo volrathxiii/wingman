@@ -222,7 +222,8 @@ function startMicrophone(callback) {
 		rate: '16000',
 		channels: '1',
 		debug: false,
-		fileType: 'wav'
+		fileType: 'wav',
+		device: 'plughw:2,0'
 	});
 	
 	var stream = microphone.getAudioStream();
