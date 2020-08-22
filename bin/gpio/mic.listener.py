@@ -7,6 +7,7 @@ import sys
 # GPIO.output(16, True)
 
 def handle_led():
+  print('Running LED GPIO')
   try:
     import RPi.GPIO as GPIO
   except ModuleNotFoundError:

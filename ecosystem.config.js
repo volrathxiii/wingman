@@ -66,7 +66,7 @@ module.exports = {
   },{
     name: 'listener.server',
     script: 'speech.listener.js',
-    watch: ['build'],
+    watch: ['build','speech.listener.js'],
     watch_delay: 1000,
     wait_ready: true,
     ignore_watch : ["node_modules","build/workers","build/memory",'tmp'],

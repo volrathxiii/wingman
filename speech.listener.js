@@ -120,7 +120,18 @@ function processSilence(data, callback) {
 			let now = new Date().getTime();
 			if (now - silenceStart > SILENCE_THRESHOLD) {
 				silenceStart = null;
-				let lightoff = spawn('python3',[`${process.cwd()}/bin/gpio/mic.listener.py`, '--enable 0']);
+				let lightoff = spawn('python3',[`${process.cwd()}/bin/gpio/mic.listener.py`, '--enable', '0']);
+				lightoff.stdout.setEncoding('utf8');
+
+				var scriptOutput = "";
+				lightoff.stdout.on('data', function(data) {
+						//Here is where the output goes
+		
+						console.log('stdout: ' + data);
+		
+						data=data.toString();
+						scriptOutput+=data;
+				});
 				console.log('[end]');
 				let results = intermediateDecode();
 				if (results) {
@@ -165,7 +176,19 @@ function processVoice(data) {
 	silenceStart = null;
 	if (recordedChunks === 0) {
 		console.log('');
-		let lighton = spawn('python3',[`${process.cwd()}/bin/gpio/mic.listener.py`, '--enable 1']);
+		let lighton = spawn('python3',[`${process.cwd()}/bin/gpio/mic.listener.py`, '--enable', '1']);
+		lighton.stdout.setEncoding('utf8');
+
+		var scriptOutput = "";
+		lighton.stdout.on('data', function(data) {
+				//Here is where the output goes
+
+				console.log('stdout: ' + data);
+
+				data=data.toString();
+				scriptOutput+=data;
+		});
+
 		process.stdout.write('[start]'); // recording started
 	}
 	else {
@@ -227,7 +250,7 @@ function startMicrophone(callback) {
 		channels: '1',
 		debug: false,
 		fileType: 'wav',
-		device: 'plughw:2,0'
+		device: 'plughw:1,0'
 	});
 	
 	var stream = microphone.getAudioStream();
